@@ -17,6 +17,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@pixi/sound": "^4.4.1",
     "@tweenjs/tween.js": "^23.1.2",
     "css-loader": "^7.1.1",
     "pixi.js": "^6.5.10",

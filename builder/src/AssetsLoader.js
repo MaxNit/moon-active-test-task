@@ -2,7 +2,8 @@ const fs = require('fs');
 
 const MEMES = {
     'png': 'data:image/png;base64,',
-    'jpg': 'data:image/jpg;base64,'
+    'jpg': 'data:image/jpg;base64,',
+    'mp3': 'data:audio/mpeg;base64,'
 }
 
 module.exports = class AssetsLoader {
@@ -16,7 +17,8 @@ module.exports = class AssetsLoader {
     init() {
         this.cleanTarget();
         this.createTarget();
-        this.readImg(this.path + '/img');
+        this.readDirectory(this.path + '/img');
+        this.readDirectory(this.path + '/audio');
         this.createJSON();
     }
 
@@ -35,9 +37,9 @@ module.exports = class AssetsLoader {
         }
     }
 
-    readImg(imgPath, prefix) {
+    readDirectory(folderPath, prefix) {
         let json = {};
-        const files = fs.readdirSync(imgPath);
+        const files = fs.readdirSync(folderPath);
 
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
@@ -47,16 +49,17 @@ module.exports = class AssetsLoader {
             const name = splitString[0];
             let data;
 
-            if (fs.lstatSync(imgPath + '/' + file).isDirectory() && file !== '.DS_Store') {
-                this.readImg(imgPath + '/' + file, file);
+            if (fs.lstatSync(folderPath + '/' + file).isDirectory() && file !== '.DS_Store') {
+                this.readDirectory(folderPath + '/' + file, file);
                 continue;
             }
 
             switch (ext) {
+                case 'mp3':
                 case 'png':
                 case 'jpg':
-                    data = MEMES[ext] + fs.readFileSync(imgPath + `/${file}`, { encoding: 'base64' });
-                    const key = prefix ? `${prefix}/${name}` : name;
+                    data = MEMES[ext] + fs.readFileSync(folderPath + `/${file}`, { encoding: 'base64' });
+                    const key = prefix ? `${prefix}/${file}` : file;
                     json[key] = data;
                     break;
             }

@@ -1,5 +1,5 @@
 import { Loader as PIXILoader } from 'pixi.js';
-
+import { sound } from '@pixi/sound';
 export class Loader {
 
     private _loader: PIXILoader;
@@ -16,7 +16,15 @@ export class Loader {
 
         for (let name of keys) {
             const base64 = config[name];
-            this.loader.add(name, base64);
+            const split = name.split('.');
+            const key = split[0];
+            const ext = split[1];
+
+            if (ext === 'mp3') {
+                sound.add(key, base64);
+            } else {
+                this.loader.add(key, base64);
+            }
         }
 
         return new Promise(resolve => {

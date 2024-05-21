@@ -229,6 +229,15 @@ object-assign
  */
 
 /*!
+ * @pixi/sound - v4.4.1
+ * https://github.com/pixijs/pixi-sound
+ * Compiled Tue, 15 Aug 2023 19:22:13 UTC
+ *
+ * @pixi/sound is licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license
+ */
+
+/*!
  * @pixi/sprite - v6.5.10
  * Compiled Thu, 06 Jul 2023 15:25:11 UTC
  *

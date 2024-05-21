@@ -54,6 +54,7 @@ export class GridController {
         this.fxAnimation(fxPosition);
         await cell.item.disappear();
         cell.removeItem();
+        App.audio.play('pop');
 
         if (this.isCellsEmpty())
             App.emit(GameEvents.END_GAME.toString());

@@ -48,6 +48,7 @@ export class GameController {
     }
 
     private async start() {
+        App.audio.play('music', 1, true);
         this.progressBar.node.alpha = 0;
         this.counter.node.alpha = 0;
         this.grid.lock();
@@ -72,6 +73,7 @@ export class GameController {
     }
 
     private showFailedPackshot(): void {
+        App.audio.play('wrong');
         this.blackout.showAnimation();
         this.failPopup.show();
         this.failPopup.showAnimatiom();
@@ -87,6 +89,7 @@ export class GameController {
     }
 
     private endGame(): void {
+        App.audio.play('success');
         this.progressBar.stop();
         this.blackout.showAnimation();
         this.winPopup.show();

@@ -7,6 +7,7 @@ import { defaultConfig } from '../DefaultConfig';
 import * as TWEEN from '@tweenjs/tween.js';
 import { APP_EVENTS } from './APP_EVENTS';
 import { GameController } from '../GameController';
+import { AudioManger } from './AudioManager';
 
 export class Application extends utils.EventEmitter {
 
@@ -16,12 +17,14 @@ export class Application extends utils.EventEmitter {
     private _renderElementFactory: RenderElementFactory;
     private _renderElements: Map<string, RenderElement>;
     private _screenType: TScreenType;
+    private _audio: AudioManger;
     private gameController: GameController;
 
     get renderElements() { return this._renderElements };
     get renderElementsFactrory() { return this._renderElementFactory };
     get size() { return this._size };
     get screenType() { return this._screenType };
+    get audio() { return this._audio };
 
     set screenType(value: TScreenType) { this._screenType = value };
 
@@ -30,6 +33,7 @@ export class Application extends utils.EventEmitter {
         this._size = this.calculateSizes();
         this.app = this.createApp();
         this.loader = new Loader(this.app.loader);
+        this._audio = new AudioManger();
         this._renderElements = new Map();
         this._renderElementFactory = new RenderElementFactory(this);
 
